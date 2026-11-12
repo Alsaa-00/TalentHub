@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Companies – TalentHub</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="/static/assets/logo.svg" alt="TalentHub">
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Administration</div>
+        <a href="/admin/dashboard.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Overview
+        </a>
+        <a href="/admin/students.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Manage Students
+        </a>
+        <a href="/admin/companies.html" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Manage Companies
+        </a>
+        <a href="/admin/reports.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Placement Reports
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar" style="background: linear-gradient(135deg, #0f172a, #2563eb);">A</div>
+          <div class="user-info">
+            <div class="user-name">Coordinator</div>
+            <div class="user-role">Placement Admin</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn-sidebar-toggle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="page-title">Corporate Partners Directory</div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-primary btn-sm" onclick="openRegisterCompanyModal()">+ Register Partner Company</button>
+          <button class="btn btn-secondary btn-sm btn-logout">Sign Out</button>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <div class="table-controls">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="company-search" class="form-control" placeholder="Search by company name, industry, or location...">
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Registered Recruiting Organizations</h3>
+            <span class="text-xs text-muted">FR-3.1: Placement coordinator registers and manages company accounts</span>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Company Name</th>
+                    <th>Industry Sector</th>
+                    <th>Location</th>
+                    <th>Recruiter Contact</th>
+                    <th>Official Website</th>
+                    <th>Registered Date</th>
+                  </tr>
+                </thead>
+                <tbody id="companies-tbody">
+                  <tr><td colspan="6" class="empty-state">Loading registered companies...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Register Company Modal (FR-3.1) -->
+  <div class="modal-overlay" id="register-company-modal">
+    <div class="modal-box modal-lg">
+      <div class="modal-header">
+        <h3>Register New Partner Company</h3>
+        <button class="modal-close" onclick="closeModal('register-company-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="admin-company-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="comp-name">Company Name <span class="req">*</span></label>
+              <input type="text" id="comp-name" class="form-control" placeholder="e.g. Amazon Development Center" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="comp-industry">Industry Domain <span class="req">*</span></label>
+              <input type="text" id="comp-industry" class="form-control" placeholder="e.g. Cloud & E-Commerce" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="comp-email">Recruiter Login Email <span class="req">*</span></label>
+              <input type="email" id="comp-email" class="form-control" placeholder="campus@company.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="comp-password">Initial Account Password <span class="req">*</span></label>
+              <input type="password" id="comp-password" class="form-control" minlength="6" placeholder="Min. 6 chars" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="comp-location">Office Location / City</label>
+              <input type="text" id="comp-location" class="form-control" placeholder="e.g. Bengaluru / Hyderabad">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="comp-website">Company Website URL</label>
+              <input type="url" id="comp-website" class="form-control" placeholder="https://www.company.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="comp-desc">Overview & Campus Profile</label>
+            <textarea id="comp-desc" class="form-control" placeholder="Brief summary of company domain and university recruitment focus..."></textarea>
+          </div>
+
+          <div class="modal-footer" style="padding-left:0; padding-right:0; margin-bottom:-1rem;">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('register-company-modal')">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="btn-save-company">Register Organization</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script>
+    let companiesList = [];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = requireAuth(['admin']);
+      if (!user) return;
+      initUserNavbar();
+
+      await loadCompanies();
+
+      document.getElementById('company-search').addEventListener('input', renderCompanies);
+
+      // Handle Register Company Submit
+      document.getElementById('admin-company-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = {
+          name: document.getElementById('comp-name').value.trim(),
+          industry: document.getElementById('comp-industry').value.trim(),
+          email: document.getElementById('comp-email').value.trim(),
+          password: document.getElementById('comp-password').value,
+          location: document.getElementById('comp-location').value.trim() || null,
+          website: document.getElementById('comp-website').value.trim() || null,
+          description: document.getElementById('comp-desc').value.trim() || null
+        };
+
+        const saveBtn = document.getElementById('btn-save-company');
+        try {
+          saveBtn.disabled = true;
+          saveBtn.textContent = 'Registering...';
+
+          await apiFetch('/companies', {
+            method: 'POST',
+            body: JSON.stringify(payload)
+          });
+
+          showToast('success', 'Company Registered', 'Organization account created successfully.');
+          closeModal('register-company-modal');
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Register Organization';
+          await loadCompanies();
+        } catch (err) {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Register Organization';
+        }
+      });
+    });
+
+    async function loadCompanies() {
+      try {
+        companiesList = await apiFetch('/companies');
+        renderCompanies();
+      } catch (err) {
+        document.getElementById('companies-tbody').innerHTML = `
+          <tr><td colspan="6" class="empty-state">Failed to load companies: ${err.message}</td></tr>
+        `;
+      }
+    }
+
+    function renderCompanies() {
+      const query = document.getElementById('company-search').value.toLowerCase().trim();
+      const tbody = document.getElementById('companies-tbody');
+
+      let filtered = companiesList.filter(c => {
+        return (
+          (c.name && c.name.toLowerCase().includes(query)) ||
+          (c.industry && c.industry.toLowerCase().includes(query)) ||
+          (c.location && c.location.toLowerCase().includes(query))
+        );
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="empty-state">
+              <h4>No companies found</h4>
+              <p>Click "Register Partner Company" to add a new recruiter.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(c => `
+        <tr>
+          <td class="font-bold">${c.name}</td>
+          <td><span class="badge badge-purple">${c.industry || 'Tech'}</span></td>
+          <td class="text-sm">${c.location || '—'}</td>
+          <td class="text-xs text-muted">${c.contact_email || '—'}</td>
+          <td class="text-xs">
+            ${c.website ? `<a href="${c.website}" target="_blank" rel="noopener">${c.website}</a>` : '—'}
+          </td>
+          <td class="text-xs text-muted">${formatDate(c.created_at)}</td>
+        </tr>
+      `).join('');
+    }
+
+    function openRegisterCompanyModal() {
+      document.getElementById('admin-company-form').reset();
+      openModal('register-company-modal');
+    }
+  </script>
+</body>
+</html>

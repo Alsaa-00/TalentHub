@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In – TalentHub Placement Portal</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      padding: 2rem 1rem;
+    }
+    .auth-container {
+      max-width: 480px;
+      margin: auto;
+      width: 100%;
+    }
+    .auth-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-xl);
+    }
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .auth-header img {
+      height: 48px;
+      margin-bottom: 1rem;
+    }
+    .demo-box {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed var(--border-color);
+    }
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .btn-demo {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.75rem;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      line-height: 1.3;
+    }
+    .btn-demo:hover {
+      background: var(--primary-light);
+      border-color: var(--primary-border);
+      color: var(--primary);
+    }
+    .btn-demo strong {
+      color: var(--navy-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="/index.html">
+          <img src="/static/assets/logo.svg" alt="TalentHub">
+        </a>
+        <h2>Welcome to TalentHub</h2>
+        <p class="text-muted text-sm" style="margin-top: 0.25rem;">Sign in to your campus placement account</p>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="email">Institutional Email Address</label>
+          <input type="email" id="email" class="form-control" placeholder="name@talenthub.edu or company@org.com" required autofocus>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="padding: 0.75rem; font-size: 1rem;">
+          Sign In
+        </button>
+      </form>
+
+      <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8125rem; color: var(--text-muted);">
+        Don't have an account? <br>
+        <a href="/register.html" class="font-bold">Register as Student</a> &bull; 
+        <a href="/register-company.html" class="font-bold">Register as Company</a>
+      </div>
+
+      <!-- Quick Faculty Demo Logins -->
+      <div class="demo-box">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
+            ⚡ 1-Click Faculty Demo Fill
+          </span>
+          <button id="btn-reset-seed" class="btn btn-sm btn-secondary" style="font-size: 0.6875rem; padding: 0.2rem 0.5rem;" title="Resets database and re-populates test students and companies">
+            Reset Seed Data
+          </button>
+        </div>
+
+        <div class="demo-grid">
+          <button type="button" class="btn-demo" data-demo="student-rahul">
+            <strong>🎓 Rahul (Student)</strong>
+            <span>CSAI &bull; CGPA 8.20 &bull; Ready</span>
+          </button>
+          <button type="button" class="btn-demo" data-demo="student-priya">
+            <strong>🎓 Priya (Placed)</strong>
+            <span>CSE &bull; CGPA 9.15 &bull; MSFT Offer</span>
+          </button>
+          <button type="button" class="btn-demo" data-demo="student-amit">
+            <strong>🎓 Amit (Boundary)</strong>
+            <span>ECE &bull; CGPA 6.50 &bull; Exact match</span>
+          </button>
+          <button type="button" class="btn-demo" data-demo="company-tcs">
+            <strong>🏢 TCS Recruiter</strong>
+            <span>Pool Drive (7.2 LPA)</span>
+          </button>
+          <button type="button" class="btn-demo" data-demo="company-msft">
+            <strong>🏢 Microsoft HR</strong>
+            <span>SDE 1 Drive (24.5 LPA)</span>
+          </button>
+          <button type="button" class="btn-demo" data-demo="admin-coord">
+            <strong>🛡️ Coordinator</strong>
+            <span>Full Admin Privileges</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 1.5rem; color: #94a3b8; font-size: 0.8125rem;">
+      <a href="/index.html" style="color: #cbd5e1;">&larr; Back to Landing Page</a> &bull; 
+      <a href="/docs" target="_blank" style="color: #cbd5e1;">Open Swagger Docs</a>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/auth.js"></script>
+  <script>
+    // Reset seed data button handler
+    const resetBtn = document.getElementById('btn-reset-seed');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', async () => {
+        try {
+          resetBtn.disabled = true;
+          resetBtn.textContent = 'Resetting...';
+          const res = await apiFetch('/seed', { method: 'POST' });
+          showToast('success', 'Database Initialized', res.message || 'Demo records loaded.');
+          resetBtn.disabled = false;
+          resetBtn.textContent = 'Reset Seed Data';
+        } catch (e) {
+          resetBtn.disabled = false;
+          resetBtn.textContent = 'Reset Seed Data';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

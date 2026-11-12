@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TalentHub – Campus Placement Management System</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    .hero-section {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid rgba(147, 197, 253, 0.3);
+      padding: 0.35rem 1rem;
+      border-radius: var(--radius-full);
+      color: #93c5fd;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #ffffff;
+      max-width: 800px;
+      margin: 0 auto 1.25rem;
+      line-height: 1.15;
+    }
+    .hero-title span {
+      background: linear-gradient(to right, #60a5fa, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      font-size: 1.125rem;
+      color: #cbd5e1;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .landing-nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: -3rem auto 4rem;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+    .feature-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+    }
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .workflow-section {
+      max-width: 1100px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+    .workflow-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .step-box {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 0.75rem;
+      position: relative;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: #ffffff;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin: 0 auto 0.75rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header class="landing-nav">
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <img src="/static/assets/logo.svg" alt="TalentHub Logo" style="height: 42px;">
+    </div>
+    <div style="display: flex; gap: 1rem;">
+      <a href="/docs" target="_blank" class="btn btn-secondary btn-sm">Swagger API Docs</a>
+      <a href="/login.html" class="btn btn-primary btn-sm">Sign In / Demo Portals</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      College AI-Assisted Placement Platform
+    </div>
+    <h1 class="hero-title">Next-Gen Campus <span>Recruitment & Placement</span> System</h1>
+    <p class="hero-desc">
+      Automating the complete university placement lifecycle: automated eligibility checks, real-time shortlisting, multi-round interview pipelines, and verified offer management.
+    </p>
+    <div class="hero-cta">
+      <a href="/login.html" class="btn btn-primary btn-lg">Launch Demo Portals</a>
+      <a href="/register.html" class="btn btn-secondary btn-lg" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2);">Student Registration</a>
+      <a href="/register-company.html" class="btn btn-secondary btn-lg" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2);">Company Partner Portal</a>
+    </div>
+  </section>
+
+  <!-- Feature Highlights -->
+  <section class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon" style="background: #eff6ff; color: #2563eb;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h3 style="margin-bottom: 0.5rem;">Automated Eligibility Engine</h3>
+      <p class="text-muted text-sm">
+        Rules R1 through R4 evaluated in real-time against minimum CGPA, active backlog ceilings, one-company acceptance policy, and branch whitelists.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: #f5f3ff; color: #8b5cf6;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </div>
+      <h3 style="margin-bottom: 0.5rem;">Company Drive Management</h3>
+      <p class="text-muted text-sm">
+        Recruiters post custom job criteria, conduct one-click batch applicant shortlisting, schedule interview rounds, and record outcomes with instant notifications.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon" style="background: #ecfdf5; color: #10b981;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <h3 style="margin-bottom: 0.5rem;">Offer Lifecycle & Statistics</h3>
+      <p class="text-muted text-sm">
+        Cryptographically signed offer letters with one-click student acceptance or decline. Automated placement percentage calculations and branch-wise analytical reports.
+      </p>
+    </div>
+  </section>
+
+  <!-- Lifecycle Workflow -->
+  <section class="workflow-section">
+    <h2>Strict 6-Stage Placement Workflow</h2>
+    <p class="text-muted text-sm" style="margin-top: 0.5rem;">Formally normalized to BCNF with state transition validation</p>
+
+    <div class="workflow-steps">
+      <div class="step-box">
+        <div class="step-num">1</div>
+        <div class="font-bold text-sm">APPLIED</div>
+        <div class="text-xs text-muted" style="margin-top: 0.25rem;">Candidate applies after rule check</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">2</div>
+        <div class="font-bold text-sm">SHORTLISTED</div>
+        <div class="text-xs text-muted" style="margin-top: 0.25rem;">Batch drive verification run</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">3</div>
+        <div class="font-bold text-sm">SCHEDULED</div>
+        <div class="text-xs text-muted" style="margin-top: 0.25rem;">Interview rounds & venues assigned</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">4</div>
+        <div class="font-bold text-sm">INTERVIEWED</div>
+        <div class="text-xs text-muted" style="margin-top: 0.25rem;">Rounds passed & feedback recorded</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">5</div>
+        <div class="font-bold text-sm">OFFERED</div>
+        <div class="text-xs text-muted" style="margin-top: 0.25rem;">CTC & offer letter key issued</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">6</div>
+        <div class="font-bold text-sm" style="color: var(--success);">ACCEPTED</div>
+        <div class="text-xs text-muted" style="margin-top: 0.25rem;">One-company rule applied</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: #ffffff; border-top: 1px solid var(--border-color); padding: 2rem; text-align: center; color: var(--text-muted); font-size: 0.875rem;">
+    <p>TalentHub – Campus Placement Management System &copy; 2026. Built with Python FastAPI & SQLite.</p>
+    <div style="margin-top: 0.5rem; display: flex; justify-content: center; gap: 1.5rem;">
+      <a href="/docs" target="_blank">Swagger Documentation</a>
+      <a href="/redoc" target="_blank">ReDoc Specification</a>
+      <a href="/login.html">Demo Accounts</a>
+    </div>
+  </footer>
+
+</body>
+</html>

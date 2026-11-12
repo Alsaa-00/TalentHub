@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placement Reports & Analytics – TalentHub</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="/static/assets/logo.svg" alt="TalentHub">
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Administration</div>
+        <a href="/admin/dashboard.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Overview
+        </a>
+        <a href="/admin/students.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Manage Students
+        </a>
+        <a href="/admin/companies.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Manage Companies
+        </a>
+        <a href="/admin/reports.html" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Placement Reports
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar" style="background: linear-gradient(135deg, #0f172a, #2563eb);">A</div>
+          <div class="user-info">
+            <div class="user-name">Coordinator</div>
+            <div class="user-role">Placement Admin</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn-sidebar-toggle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="page-title">University Placement Analytics & Official Reports</div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Print Report</button>
+          <span class="season-badge">Season 2026-2027</span>
+          <button class="btn btn-secondary btn-sm btn-logout">Sign Out</button>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <!-- High Level Metrics Overview -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <h3 class="card-title">Placement Season Summary</h3>
+            <span class="badge badge-ACCEPTED" id="report-season-badge">Season 2026-2027</span>
+          </div>
+          <div class="card-body">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem;">
+              <div>
+                <div class="text-xs text-muted font-bold" style="text-transform: uppercase;">Registered Pool</div>
+                <div class="font-bold text-2xl" id="rep-total-students">0</div>
+                <div class="text-xs text-muted">Eligible candidates</div>
+              </div>
+              <div>
+                <div class="text-xs text-muted font-bold" style="text-transform: uppercase;">Placed Candidates</div>
+                <div class="font-bold text-2xl text-success" id="rep-placed-students">0</div>
+                <div class="text-xs text-muted">Offers accepted</div>
+              </div>
+              <div>
+                <div class="text-xs text-muted font-bold" style="text-transform: uppercase;">Placement Ratio</div>
+                <div class="font-bold text-2xl text-primary" id="rep-placement-pct">0.0%</div>
+                <div class="text-xs text-muted">Overall success rate</div>
+              </div>
+              <div>
+                <div class="text-xs text-muted font-bold" style="text-transform: uppercase;">Average CTC</div>
+                <div class="font-bold text-2xl text-primary" id="rep-avg-pkg">₹0.00 LPA</div>
+                <div class="text-xs text-muted">Mean accepted package</div>
+              </div>
+              <div>
+                <div class="text-xs text-muted font-bold" style="text-transform: uppercase;">Highest CTC</div>
+                <div class="font-bold text-2xl text-success" id="rep-max-pkg">₹0.00 LPA</div>
+                <div class="text-xs text-muted">Peak package offered</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Branch-wise Breakdown Table -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <h3 class="card-title">Branch-wise Placement Performance Breakdown</h3>
+            <span class="text-xs text-muted">Engineering departments</span>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Engineering Branch</th>
+                    <th>Registered Candidates</th>
+                    <th>Placed Candidates</th>
+                    <th>Placement Rate</th>
+                    <th>Average Package (CTC)</th>
+                    <th>Highest Package (CTC)</th>
+                  </tr>
+                </thead>
+                <tbody id="branch-breakdown-tbody">
+                  <tr><td colspan="6" class="empty-state">Loading branch analytics...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Placed Students Honor Roll -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Placed Students Honor Roll (Verified Acceptances)</h3>
+            <span class="text-xs text-muted">Updated in real-time upon student offer acceptance</span>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>USN</th>
+                    <th>Candidate Name</th>
+                    <th>Branch</th>
+                    <th>CGPA</th>
+                    <th>Recruiting Company</th>
+                    <th>Designation</th>
+                    <th>Package (CTC)</th>
+                    <th>Offer Verification Key</th>
+                    <th>Accepted Date</th>
+                  </tr>
+                </thead>
+                <tbody id="placed-students-tbody">
+                  <tr><td colspan="9" class="empty-state">Loading placed candidates honor roll...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = requireAuth(['admin']);
+      if (!user) return;
+      initUserNavbar();
+
+      try {
+        const stats = await apiFetch('/reports/placement-statistics');
+
+        document.getElementById('rep-total-students').textContent = stats.total_registered_students;
+        document.getElementById('rep-placed-students').textContent = stats.total_placed_students;
+        document.getElementById('rep-placement-pct').textContent = `${stats.overall_placement_percentage.toFixed(1)}%`;
+        document.getElementById('rep-avg-pkg').textContent = formatLPA(stats.average_package_lpa);
+        document.getElementById('rep-max-pkg').textContent = formatLPA(stats.highest_package_lpa);
+        document.getElementById('report-season-badge').textContent = `Season ${stats.season}`;
+
+        // Render Branch Table
+        const brTbody = document.getElementById('branch-breakdown-tbody');
+        if (!stats.branch_breakdown || stats.branch_breakdown.length === 0) {
+          brTbody.innerHTML = '<tr><td colspan="6" class="empty-state">No branch data available.</td></tr>';
+        } else {
+          brTbody.innerHTML = stats.branch_breakdown.map(b => `
+            <tr>
+              <td class="font-bold"><span class="badge badge-blue">${b.branch}</span></td>
+              <td>${b.total_students}</td>
+              <td class="font-bold text-success">${b.placed_students}</td>
+              <td>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <span class="font-bold">${b.placement_percentage.toFixed(1)}%</span>
+                  <div style="background: #e2e8f0; height: 6px; width: 60px; border-radius: 3px; overflow: hidden;">
+                    <div style="background: var(--success); height: 100%; width: ${Math.min(100, b.placement_percentage)}%;"></div>
+                  </div>
+                </div>
+              </td>
+              <td class="font-bold text-primary">${formatLPA(b.average_package_lpa)}</td>
+              <td class="font-bold text-success">${formatLPA(b.highest_package_lpa)}</td>
+            </tr>
+          `).join('');
+        }
+
+        // Render Placed Students
+        const placed = await apiFetch('/reports/placed-students');
+        const plTbody = document.getElementById('placed-students-tbody');
+
+        if (!placed || placed.length === 0) {
+          plTbody.innerHTML = '<tr><td colspan="9" class="empty-state">No student has accepted a placement offer yet.</td></tr>';
+        } else {
+          plTbody.innerHTML = placed.map(p => `
+            <tr>
+              <td><code class="font-bold">${p.usn}</code></td>
+              <td class="font-bold">${p.full_name}</td>
+              <td><span class="badge badge-blue">${p.branch}</span></td>
+              <td class="font-bold">${p.cgpa.toFixed(2)}</td>
+              <td class="font-bold text-primary">${p.company_name}</td>
+              <td>${p.job_role}</td>
+              <td class="font-bold text-success">${formatLPA(p.package_lpa)}</td>
+              <td><code class="text-xs" style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-weight:700;">${p.offer_letter_key}</code></td>
+              <td class="text-xs text-muted">${formatDate(p.accepted_date)}</td>
+            </tr>
+          `).join('');
+        }
+
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

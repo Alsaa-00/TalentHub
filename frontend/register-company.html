@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Registration – TalentHub</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      padding: 2.5rem 1rem;
+    }
+    .auth-container {
+      max-width: 680px;
+      margin: auto;
+      width: 100%;
+    }
+    .auth-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-xl);
+    }
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .auth-header img {
+      height: 44px;
+      margin-bottom: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="/index.html">
+          <img src="/static/assets/logo.svg" alt="TalentHub">
+        </a>
+        <h2>Recruiter & Corporate Registration</h2>
+        <p class="text-muted text-sm" style="margin-top: 0.25rem;">Partner with our university to conduct campus hiring drives</p>
+      </div>
+
+      <form id="company-register-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="company_name">Company Name <span class="req">*</span></label>
+            <input type="text" id="company_name" class="form-control" placeholder="e.g. Tata Consultancy Services" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="industry">Industry Sector <span class="req">*</span></label>
+            <input type="text" id="industry" class="form-control" placeholder="e.g. Information Technology / Cloud" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="email">Recruiter Corporate Email <span class="req">*</span></label>
+            <input type="email" id="email" class="form-control" placeholder="campus@company.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contact_email">Alternate Contact Email</label>
+            <input type="email" id="contact_email" class="form-control" placeholder="recruiting.lead@company.com">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="website">Company Website URL</label>
+            <input type="url" id="website" class="form-control" placeholder="https://www.company.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="location">Office Location / City</label>
+            <input type="text" id="location" class="form-control" placeholder="e.g. Bengaluru / Hybrid">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Create Account Password <span class="req">*</span></label>
+          <input type="password" id="password" class="form-control" minlength="6" placeholder="Min. 6 characters" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="description">Company Profile Overview</label>
+          <textarea id="description" class="form-control" placeholder="Briefly describe your company, culture, and key domains..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="padding: 0.875rem; font-size: 1rem; margin-top: 1rem;">
+          Register Company Profile
+        </button>
+      </form>
+
+      <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8125rem; color: var(--text-muted);">
+        Already registered? <a href="/login.html" class="font-bold">Sign In here</a> &bull; 
+        <a href="/register.html">Student Registration</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

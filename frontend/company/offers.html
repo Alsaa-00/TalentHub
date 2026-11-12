@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offer Management – TalentHub</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="/static/assets/logo.svg" alt="TalentHub">
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Recruiter Portal</div>
+        <a href="/company/dashboard.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <a href="/company/jobs.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Job Drives
+        </a>
+        <a href="/company/applicants.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Applicants & Shortlist
+        </a>
+        <a href="/company/interviews.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Interview Management
+        </a>
+        <a href="/company/offers.html" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+          Offer Management
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar" style="background: linear-gradient(135deg, #8b5cf6, #2563eb);">C</div>
+          <div class="user-info">
+            <div class="user-name">Loading...</div>
+            <div class="user-role">Company Partner</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn-sidebar-toggle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="page-title">Placement Offers Issuance & Tracking</div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-primary btn-sm" onclick="openIssueOfferModal()">+ Issue Placement Offer</button>
+          <button class="btn btn-secondary btn-sm btn-logout">Sign Out</button>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Issued Placement Offers (Verified Key Audit)</h3>
+            <span class="text-xs text-muted">Offers can be issued only to candidates in INTERVIEWED status (Rule FR-8.1)</span>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>USN</th>
+                    <th>Candidate Name</th>
+                    <th>Designation</th>
+                    <th>Compensation (CTC)</th>
+                    <th>Offer Letter Key</th>
+                    <th>Joining Date</th>
+                    <th>Issued Date</th>
+                    <th>Candidate Decision</th>
+                  </tr>
+                </thead>
+                <tbody id="company-offers-tbody">
+                  <tr><td colspan="8" class="empty-state">Loading issued offers...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Issue Offer Modal -->
+  <div class="modal-overlay" id="offer-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Issue Formal Campus Placement Offer</h3>
+        <button class="modal-close" onclick="closeModal('offer-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="offer-form">
+          <div class="form-group">
+            <label class="form-label" for="offer-app-id">Select Interviewed Candidate <span class="req">*</span></label>
+            <select id="offer-app-id" class="form-control" required>
+              <option value="">Loading qualified candidates...</option>
+            </select>
+            <div class="form-hint">Only candidates with status <strong>INTERVIEWED</strong> are eligible for offer issuance.</div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="offer-designation">Designation / Role Title <span class="req">*</span></label>
+              <input type="text" id="offer-designation" class="form-control" placeholder="e.g. Software Engineer" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="offer-package">Annual Package (₹ LPA) <span class="req">*</span></label>
+              <input type="number" id="offer-package" class="form-control" step="0.1" min="0" placeholder="e.g. 12.0" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="offer-joining">Expected Joining Timeline</label>
+            <input type="text" id="offer-joining" class="form-control" value="July 2027">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="offer-terms">Terms & Special Conditions</label>
+            <textarea id="offer-terms" class="form-control" placeholder="Full-time employment, performance incentives, probation requirements..."></textarea>
+          </div>
+
+          <div class="modal-footer" style="padding-left:0; padding-right:0; margin-bottom:-1rem;">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('offer-modal')">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="btn-save-offer">Issue Verified Offer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script>
+    let issuedOffers = [];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = requireAuth(['company', 'admin']);
+      if (!user) return;
+      initUserNavbar();
+
+      await loadOffers();
+
+      // Handle Offer Submit
+      document.getElementById('offer-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const appId = parseInt(document.getElementById('offer-app-id').value);
+        const designation = document.getElementById('offer-designation').value.trim();
+        const packageLpa = parseFloat(document.getElementById('offer-package').value);
+        const joining = document.getElementById('offer-joining').value.trim();
+        const terms = document.getElementById('offer-terms').value.trim() || null;
+
+        const saveBtn = document.getElementById('btn-save-offer');
+        try {
+          saveBtn.disabled = true;
+          saveBtn.textContent = 'Generating Secure Key...';
+
+          await apiFetch('/offers', {
+            method: 'POST',
+            body: JSON.stringify({
+              application_id: appId,
+              designation: designation,
+              package_lpa: packageLpa,
+              joining_date: joining,
+              terms: terms
+            })
+          });
+
+          showToast('success', 'Offer Issued', 'Placement offer with cryptographic key has been sent to student.');
+          closeModal('offer-modal');
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Issue Verified Offer';
+          await loadOffers();
+        } catch (err) {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Issue Verified Offer';
+        }
+      });
+    });
+
+    async function loadOffers() {
+      try {
+        issuedOffers = await apiFetch('/offers/company');
+        renderOffers();
+      } catch (err) {
+        document.getElementById('company-offers-tbody').innerHTML = `
+          <tr><td colspan="8" class="empty-state">Failed to load offers: ${err.message}</td></tr>
+        `;
+      }
+    }
+
+    function renderOffers() {
+      const tbody = document.getElementById('company-offers-tbody');
+      if (!issuedOffers || issuedOffers.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" class="empty-state">
+              <h4>No Placement Offers Issued Yet</h4>
+              <p>Once candidates complete and clear their interview rounds, issue formal offers here.</p>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = issuedOffers.map(o => {
+        let decisionBadge = '<span class="badge badge-OFFERED">Awaiting Decision</span>';
+        if (o.accepted) decisionBadge = '<span class="badge badge-ACCEPTED">Accepted ✓</span>';
+        else if (o.declined) decisionBadge = '<span class="badge badge-REJECTED">Declined</span>';
+
+        return `
+          <tr>
+            <td><code class="font-bold">${o.student_usn || '—'}</code></td>
+            <td class="font-bold">${o.student_name || 'Candidate'}</td>
+            <td>${o.designation}</td>
+            <td class="font-bold text-success">${formatLPA(o.package_lpa)}</td>
+            <td><code class="text-xs" style="background:#f1f5f9; padding:3px 6px; border-radius:4px; font-weight:700;">${o.offer_letter_key}</code></td>
+            <td class="text-sm">${o.joining_date || 'July 2027'}</td>
+            <td class="text-xs text-muted">${formatDate(o.issued_at)}</td>
+            <td>${decisionBadge}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function openIssueOfferModal() {
+      document.getElementById('offer-form').reset();
+      const selectEl = document.getElementById('offer-app-id');
+      selectEl.innerHTML = '<option value="">Loading interviewed candidates...</option>';
+      openModal('offer-modal');
+
+      try {
+        // Fetch candidates for company drives that are in INTERVIEWED status
+        const jobs = await apiFetch('/jobs');
+        let qualifiedCandidates = [];
+
+        for (const j of jobs) {
+          const apps = await apiFetch(`/applications/job/${j.id}?status=INTERVIEWED`);
+          for (const a of apps) {
+            // Ensure no duplicate offer already exists
+            const hasExisting = issuedOffers.some(o => o.application_id === a.id);
+            if (!hasExisting) {
+              qualifiedCandidates.push({
+                appId: a.id,
+                name: a.student ? a.student.full_name : 'Student',
+                usn: a.student ? a.student.usn : '',
+                role: j.role
+              });
+            }
+          }
+        }
+
+        if (qualifiedCandidates.length === 0) {
+          selectEl.innerHTML = '<option value="">No INTERVIEWED candidates pending offers</option>';
+        } else {
+          selectEl.innerHTML = '<option value="">Select Candidate...</option>' + 
+            qualifiedCandidates.map(c => `<option value="${c.appId}">${c.name} (${c.usn}) – ${c.role}</option>`).join('');
+        }
+      } catch (e) {
+        selectEl.innerHTML = '<option value="">Failed to load candidates</option>';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Recruiter Dashboard – TalentHub</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="/static/assets/logo.svg" alt="TalentHub">
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Recruiter Portal</div>
+        <a href="/company/dashboard.html" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <a href="/company/jobs.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Job Drives
+        </a>
+        <a href="/company/applicants.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Applicants & Shortlist
+        </a>
+        <a href="/company/interviews.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Interview Management
+        </a>
+        <a href="/company/offers.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+          Offer Management
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar" style="background: linear-gradient(135deg, #8b5cf6, #2563eb);">C</div>
+          <div class="user-info">
+            <div class="user-name">Loading...</div>
+            <div class="user-role">Company Partner</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn-sidebar-toggle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="page-title">Company Recruitment Command Center</div>
+        </div>
+        <div class="topbar-right">
+          <span class="season-badge">Season 2026-2027</span>
+          <button class="btn btn-secondary btn-sm btn-logout">Sign Out</button>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <!-- Recruiter Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Active Job Drives</span>
+              <span class="stat-value" id="stat-total-jobs">0</span>
+              <span class="stat-subtext">Published on campus</span>
+            </div>
+            <div class="stat-icon blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Total Applicants</span>
+              <span class="stat-value" id="stat-total-applicants">0</span>
+              <span class="stat-subtext">Received submissions</span>
+            </div>
+            <div class="stat-icon purple">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Shortlisted Candidates</span>
+              <span class="stat-value" id="stat-shortlisted">0</span>
+              <span class="stat-subtext">Eligible for interview</span>
+            </div>
+            <div class="stat-icon amber">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Offers Accepted</span>
+              <span class="stat-value" id="stat-offers-accepted">0</span>
+              <span class="stat-subtext" id="stat-offers-sub">0 offers issued</span>
+            </div>
+            <div class="stat-icon green">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Drives Table -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Campus Recruitment Drives Overview</h3>
+            <a href="/company/jobs.html" class="btn btn-primary btn-sm">+ Post New Drive</a>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Role Designation</th>
+                    <th>Compensation (CTC)</th>
+                    <th>Min CGPA Cutoff</th>
+                    <th>Drive Date</th>
+                    <th>Applications</th>
+                    <th>Status</th>
+                    <th>Quick Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="company-jobs-tbody">
+                  <tr><td colspan="7" class="empty-state">Loading company recruitment drives...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = requireAuth(['company']);
+      if (!user) return;
+      initUserNavbar();
+
+      try {
+        const data = await apiFetch('/dashboard/company');
+
+        document.getElementById('stat-total-jobs').textContent = data.total_jobs;
+        document.getElementById('stat-total-applicants').textContent = data.total_applicants;
+        document.getElementById('stat-shortlisted').textContent = data.total_shortlisted;
+        document.getElementById('stat-offers-accepted').textContent = data.total_offers_accepted;
+        document.getElementById('stat-offers-sub').textContent = `${data.total_offers_issued} offers issued`;
+
+        const tbody = document.getElementById('company-jobs-tbody');
+        if (!data.recent_jobs || data.recent_jobs.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="7" class="empty-state">
+                <h4>No Recruitment Drives Posted Yet</h4>
+                <p>Create your first campus recruitment drive with eligibility criteria.</p>
+                <a href="/company/jobs.html" class="btn btn-primary btn-sm" style="margin-top:0.5rem;">Post New Job</a>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = data.recent_jobs.map(j => `
+          <tr>
+            <td class="font-bold">${j.role}</td>
+            <td class="font-bold text-success">${formatLPA(j.package_lpa)}</td>
+            <td>≥ ${j.min_cgpa.toFixed(2)} CGPA</td>
+            <td>${j.drive_date}</td>
+            <td><span class="badge badge-blue">${j.total_applications || 0} Applicants</span></td>
+            <td>
+              <span class="badge ${j.is_open ? 'badge-ACCEPTED' : 'badge-REJECTED'}">
+                ${j.is_open ? 'Open' : 'Closed'}
+              </span>
+            </td>
+            <td>
+              <a href="/company/applicants.html?job_id=${j.id}" class="btn btn-secondary btn-sm">View Applicants</a>
+            </td>
+          </tr>
+        `).join('');
+
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

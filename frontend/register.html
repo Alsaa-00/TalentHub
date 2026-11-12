@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration – TalentHub</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      padding: 2.5rem 1rem;
+    }
+    .auth-container {
+      max-width: 680px;
+      margin: auto;
+      width: 100%;
+    }
+    .auth-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-xl);
+    }
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .auth-header img {
+      height: 44px;
+      margin-bottom: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="/index.html">
+          <img src="/static/assets/logo.svg" alt="TalentHub">
+        </a>
+        <h2>Student Placement Registration</h2>
+        <p class="text-muted text-sm" style="margin-top: 0.25rem;">Create your profile for the 2026-2027 campus recruitment season</p>
+      </div>
+
+      <form id="student-register-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="full_name">Full Name <span class="req">*</span></label>
+            <input type="text" id="full_name" class="form-control" placeholder="e.g. Rahul Sharma" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="usn">University Seat No (USN) <span class="req">*</span></label>
+            <input type="text" id="usn" class="form-control" placeholder="e.g. 1MS21CS001" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="email">Institutional Email Address <span class="req">*</span></label>
+            <input type="email" id="email" class="form-control" placeholder="rahul@talenthub.edu" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="branch">Engineering Branch <span class="req">*</span></label>
+            <select id="branch" class="form-control" required>
+              <option value="" disabled selected>Select Branch</option>
+              <option value="CSE">Computer Science & Engineering (CSE)</option>
+              <option value="CSAI">AI & Machine Learning (CSAI)</option>
+              <option value="ISE">Information Science & Engineering (ISE)</option>
+              <option value="ECE">Electronics & Communication (ECE)</option>
+              <option value="MECH">Mechanical Engineering (MECH)</option>
+              <option value="CIVIL">Civil Engineering (CIVIL)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="cgpa">Cumulative GPA (10-Point Scale) <span class="req">*</span></label>
+            <input type="number" id="cgpa" class="form-control" step="0.01" min="0" max="10" placeholder="e.g. 8.20" required>
+            <div class="form-hint">Evaluated against company cutoffs (>= boundary qualifies)</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="active_backlogs">Active Backlogs <span class="req">*</span></label>
+            <input type="number" id="active_backlogs" class="form-control" min="0" value="0" required>
+            <div class="form-hint">Currently uncleared subjects</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cleared_backlogs">Cleared Backlogs</label>
+            <input type="number" id="cleared_backlogs" class="form-control" min="0" value="0">
+            <div class="form-hint">Past backlogs successfully cleared (Rule R2 ignores these)</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone Number</label>
+            <input type="tel" id="phone" class="form-control" placeholder="+91 98765 43210">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="password">Create Password <span class="req">*</span></label>
+            <input type="password" id="password" class="form-control" minlength="6" placeholder="Min. 6 characters" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="skills">Technical Skills & Key Technologies</label>
+          <input type="text" id="skills" class="form-control" placeholder="e.g. Python, SQL, React, C++, Machine Learning">
+        </div>
+
+        <!-- Digital Personal Data Protection Act 2023 Consent (FR-10.1) -->
+        <div class="form-group" style="margin-top: 1.5rem; background: #f8fafc; border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-md);">
+          <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer; font-size: 0.8125rem; color: var(--navy-dark);">
+            <input type="checkbox" id="consent_given" checked required style="margin-top: 0.2rem;">
+            <span>
+              <strong>Digital Personal Data Protection (DPDP) Act Consent:</strong> I voluntarily consent to the college placement cell processing my academic records, CGPA, and contact details for campus recruitment drives, company shortlisting, and placement reporting.
+            </span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="padding: 0.875rem; font-size: 1rem; margin-top: 1rem;">
+          Complete Student Registration
+        </button>
+      </form>
+
+      <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8125rem; color: var(--text-muted);">
+        Already registered? <a href="/login.html" class="font-bold">Sign In here</a> &bull; 
+        <a href="/register-company.html">Register as Company Partner</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

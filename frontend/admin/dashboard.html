@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placement Coordinator Dashboard – TalentHub</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="/static/assets/logo.svg" alt="TalentHub">
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Administration</div>
+        <a href="/admin/dashboard.html" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Overview
+        </a>
+        <a href="/admin/students.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Manage Students
+        </a>
+        <a href="/admin/companies.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Manage Companies
+        </a>
+        <a href="/admin/reports.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Placement Reports
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar" style="background: linear-gradient(135deg, #0f172a, #2563eb);">A</div>
+          <div class="user-info">
+            <div class="user-name">Coordinator</div>
+            <div class="user-role">Placement Admin</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn-sidebar-toggle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="page-title">University Placement Coordination</div>
+        </div>
+        <div class="topbar-right">
+          <button id="btn-admin-reset-seed" class="btn btn-secondary btn-sm" title="Re-seeds realistic demo placement dataset">
+            Reset Sample Data
+          </button>
+          <a href="/docs" target="_blank" class="btn btn-secondary btn-sm">Swagger Docs</a>
+          <button class="btn btn-secondary btn-sm btn-logout">Sign Out</button>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <!-- Main Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Total Registered</span>
+              <span class="stat-value" id="stat-students">0</span>
+              <span class="stat-subtext">Students in placement pool</span>
+            </div>
+            <div class="stat-icon blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Placement Percentage</span>
+              <span class="stat-value text-success" id="stat-placement-pct">0%</span>
+              <span class="stat-subtext" id="stat-placed-count">0 students placed</span>
+            </div>
+            <div class="stat-icon green">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Companies Visiting</span>
+              <span class="stat-value" id="stat-companies">0</span>
+              <span class="stat-subtext" id="stat-jobs-posted">0 drives published</span>
+            </div>
+            <div class="stat-icon purple">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Offers Issued</span>
+              <span class="stat-value" id="stat-offers">0</span>
+              <span class="stat-subtext">Offers recorded</span>
+            </div>
+            <div class="stat-icon amber">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Compensation Metrics Row -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+          <div class="card" style="background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);">
+            <div class="card-body" style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <span class="text-xs font-bold text-primary" style="text-transform: uppercase;">Average CTC Package</span>
+                <div class="font-bold text-2xl text-primary" id="stat-avg-package" style="margin-top: 0.25rem;">₹0.00 LPA</div>
+                <div class="text-xs text-muted" style="margin-top: 0.25rem;">Across all accepted corporate offers</div>
+              </div>
+              <div style="font-size: 2.5rem; opacity: 0.2;">📈</div>
+            </div>
+          </div>
+
+          <div class="card" style="background: linear-gradient(135deg, #ecfdf5 0%, #ffffff 100%);">
+            <div class="card-body" style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <span class="text-xs font-bold text-success" style="text-transform: uppercase;">Highest Placement CTC</span>
+                <div class="font-bold text-2xl text-success" id="stat-highest-package" style="margin-top: 0.25rem;">₹0.00 LPA</div>
+                <div class="text-xs text-muted" style="margin-top: 0.25rem;">Top university placement package</div>
+              </div>
+              <div style="font-size: 2.5rem; opacity: 0.2;">🏆</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Branch Placed Breakdown & Quick Links -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+          <!-- Branch Breakdown Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Branch-wise Placed Students</h3>
+              <a href="/admin/reports.html" class="text-sm font-bold">Detailed Analytics &rarr;</a>
+            </div>
+            <div class="card-body" id="branch-breakdown-container">
+              <div class="empty-state">Loading branch statistics...</div>
+            </div>
+          </div>
+
+          <!-- Quick Navigation Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Coordinator Modules</h3>
+            </div>
+            <div class="card-body" style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <a href="/admin/students.html" class="btn btn-secondary btn-block" style="justify-content: flex-start;">
+                🎓 Manage Student Database
+              </a>
+              <a href="/admin/companies.html" class="btn btn-secondary btn-block" style="justify-content: flex-start;">
+                🏢 Register Partner Company
+              </a>
+              <a href="/admin/reports.html" class="btn btn-secondary btn-block" style="justify-content: flex-start;">
+                📊 View Placement Reports
+              </a>
+              <a href="/docs" target="_blank" class="btn btn-outline btn-block" style="justify-content: flex-start;">
+                ⚙️ FastAPI Swagger Interface
+              </a>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = requireAuth(['admin']);
+      if (!user) return;
+      initUserNavbar();
+
+      await loadDashboard();
+
+      // Reset seed data
+      document.getElementById('btn-admin-reset-seed').addEventListener('click', async () => {
+        try {
+          const res = await apiFetch('/seed', { method: 'POST' });
+          showToast('success', 'Seed Initialized', res.message);
+          await loadDashboard();
+        } catch (err) {}
+      });
+    });
+
+    async function loadDashboard() {
+      try {
+        const stats = await apiFetch('/dashboard/admin');
+
+        document.getElementById('stat-students').textContent = stats.total_students;
+        document.getElementById('stat-placement-pct').textContent = `${stats.placement_percentage.toFixed(1)}%`;
+        document.getElementById('stat-placed-count').textContent = `${stats.total_placed_students} of ${stats.total_students} placed`;
+        document.getElementById('stat-companies').textContent = stats.total_companies;
+        document.getElementById('stat-jobs-posted').textContent = `${stats.total_jobs} drives published`;
+        document.getElementById('stat-offers').textContent = stats.total_offers;
+        document.getElementById('stat-avg-package').textContent = `₹${stats.average_package_lpa.toFixed(2)} LPA`;
+        document.getElementById('stat-highest-package').textContent = `₹${stats.highest_package_lpa.toFixed(2)} LPA`;
+
+        // Render branch breakdown
+        const branchContainer = document.getElementById('branch-breakdown-container');
+        const branchEntries = Object.entries(stats.branch_wise_placed || {});
+        
+        if (branchEntries.length === 0) {
+          branchContainer.innerHTML = '<p class="text-muted text-sm">No students placed yet this season.</p>';
+        } else {
+          branchContainer.innerHTML = branchEntries.map(([branch, count]) => `
+            <div style="margin-bottom: 1rem;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                <span class="font-bold text-sm">${branch}</span>
+                <span class="text-sm font-bold text-success">${count} Placed</span>
+              </div>
+              <div style="background: #e2e8f0; height: 8px; border-radius: 4px; overflow: hidden;">
+                <div style="background: var(--success); height: 100%; width: ${Math.min(100, count * 35)}%;"></div>
+              </div>
+            </div>
+          `).join('');
+        }
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>
